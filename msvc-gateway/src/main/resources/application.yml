@@ -1,0 +1,121 @@
+spring:
+  application:
+    name: msvc-gateway
+
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: auth-service
+              uri: lb://msvc_auth-service
+              predicates:
+                - Path=/api/v1/auths/**
+
+            - id: user-service
+              uri: lb://msvc_user-service
+              predicates:
+                - Path=/api/v1/users/**
+
+            - id: component-service
+              uri: lb://msvc_component-service
+              predicates:
+                - Path=/api/v1/components/**
+
+            - id: cpu-service
+              uri: lb://msvc_cpu-service
+              predicates:
+                - Path=/api/v1/cpus/**
+
+            - id: gpu-service
+              uri: lb://msvc_gpu-service
+              predicates:
+                - Path=/api/v1/gpus/**
+
+            - id: motherboard-service
+              uri: lb://msvc_motherboard-service
+              predicates:
+                - Path=/api/v1/placas_madre/**
+
+            - id: ram-service
+              uri: lb://msvc_ram-service
+              predicates:
+                - Path=/api/v1/rams/**
+
+            - id: power-supply-service
+              uri: lb://msvc_power-supply-service
+              predicates:
+                - Path=/api/v1/fuentes_poder/**
+
+            - id: build-service
+              uri: lb://msvc_build-service
+              predicates:
+                - Path=/api/v1/builds/**
+
+            - id: compatibility-service
+              uri: lb://msvc_compatibility-service
+              predicates:
+                - Path=/api/v1/compatibilities/**
+
+            - id: benchmark-service
+              uri: lb://msvc_benchmark-service
+              predicates:
+                - Path=/api/v1/benchmarks/**
+
+            - id: quotation-service
+              uri: lb://msvc_quotation-service
+              predicates:
+                - Path=/api/v1/quotations/**
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+springdoc:
+  api-docs:
+    enabled: true
+
+  swagger-ui:
+    enabled: true
+    path: /docs/swagger-ui.html
+
+    urls:
+      - name: Auth Service
+        url: http://localhost:8085/v3/api-docs
+
+      - name: User Service
+        url: http://localhost:8091/v3/api-docs
+
+      - name: Component Service
+        url: http://localhost:8089/v3/api-docs
+
+      - name: CPU Service
+        url: http://localhost:8081/v3/api-docs
+
+      - name: GPU Service
+        url: http://localhost:8082/v3/api-docs
+
+      - name: Motherboard Service
+        url: http://localhost:8083/v3/api-docs
+
+      - name: RAM Service
+        url: http://localhost:8090/v3/api-docs
+
+      - name: Power Supply Service
+        url: http://localhost:8084/v3/api-docs
+
+      - name: Build Service
+        url: http://localhost:8087/v3/api-docs
+
+      - name: Compatibility Service
+        url: http://localhost:8088/v3/api-docs
+
+      - name: Benchmark Service
+        url: http://localhost:8086/v3/api-docs
+
+      - name: Quotation Service
+        url: http://localhost:8092/v3/api-docs
